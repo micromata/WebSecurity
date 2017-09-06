@@ -12,10 +12,12 @@
   <properties>
     <jetty.version>9.4.6.v20170531</jetty.version>
     <servlet.api.version>2.5</servlet.api.version>
+    <h2.version>1.4.196</h2.version>
     <jetty.port>8080</jetty.port>
   </properties>
 
   <dependencies>
+
     <!-- we need this for building it -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -23,6 +25,14 @@
       <version>${servlet.api.version}</version>
       <scope>compile</scope>
     </dependency>
+
+    <!-- Database for testing -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${h2.version}</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -31,12 +41,19 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty.version}</version>
         <configuration>
-          <!--webApp>${directory}/${project.build.finalName}.war</webApp-->
           <webXml>target/${artifactId}-${project.version}/WEB-INF/web.xml</webXml>
           <httpConnector>
             <port>${jetty.port}</port>
             <idleTimeout>3600000</idleTimeout>
           </httpConnector>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>
       </plugin>
     </plugins>

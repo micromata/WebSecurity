@@ -30,7 +30,7 @@
             <%@include file="csrfInclude.jsp" %>
         </div>
         <div class="tab-pane fade in" id="overViewSqlInjection">
-            SQL Injections
+            <%@include file="databaseInclude.jsp" %>
         </div>
     </div>
 </div>
