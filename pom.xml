@@ -1,0 +1,44 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>websecurity-talk</artifactId>
+  <groupId>de.micromata.talks</groupId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <url>http://www.micromata.de</url>
+  <name>micromata :: talks :: websecurity</name>
+
+
+  <properties>
+    <jetty.version>9.4.6.v20170531</jetty.version>
+    <servlet.api.version>2.5</servlet.api.version>
+    <jetty.port>8080</jetty.port>
+  </properties>
+
+  <dependencies>
+    <!-- we need this for building it -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet.api.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+        <configuration>
+          <!--webApp>${directory}/${project.build.finalName}.war</webApp-->
+          <webXml>target/${artifactId}-${project.version}/WEB-INF/web.xml</webXml>
+          <httpConnector>
+            <port>${jetty.port}</port>
+            <idleTimeout>3600000</idleTimeout>
+          </httpConnector>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
