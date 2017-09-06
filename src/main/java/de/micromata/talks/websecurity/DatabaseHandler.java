@@ -67,7 +67,8 @@ public class DatabaseHandler
   }
 
   public ResultSet executeQuery(final String queryToExecute) throws SQLException {
-    return conn.createStatement().executeQuery(queryToExecute);
+    final ResultSet resultSet = conn.createStatement().executeQuery(queryToExecute);
+    return resultSet;
   }
 
   /**

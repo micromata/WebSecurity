@@ -13,7 +13,7 @@
 
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#overViewXss" data-toggle="tab">XSS</a></li>
-        <li><a href="#overViewXssWoJs" data-toggle="tab">XSS Scriptless</a></li>
+        <li><a href="#xssWoJs" data-toggle="tab">XSS Scriptless</a></li>
         <li><a href="#overViewCSRF" data-toggle="tab">CSRF</a></li>
         <li><a href="#overViewSqlInjection" data-toggle="tab">SQL</a></li>
     </ul>
@@ -23,7 +23,7 @@
         <div class="tab-pane fade in active" id="overViewXss">
           <%@include file="xssInclude.jsp" %>
         </div>
-        <div class="tab-pane fade in active" id="overViewXssWoJs">
+        <div class="tab-pane fade in active" id="xssWoJs">
             <%@include file="xssWoJsInclude.jsp" %>
         </div>
         <div class="tab-pane fade in active" id="overViewCSRF">
