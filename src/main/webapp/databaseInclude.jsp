@@ -23,7 +23,7 @@
     <h5>Beispiele</h5>
 
     <ul>
-        <li><a href="sqlInjection/simpleSqlInjection.jsp">Einfache Beispiele</a></li>
+        <li><a target="_blank" href="sqlInjection/sqlInjection.jsp">Einfache Beispiele</a></li>
     </ul>
 
     <h5>Regeln zum Verhindern</h5>

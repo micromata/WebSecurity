@@ -2,6 +2,7 @@ package de.micromata.talks.websecurity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -66,9 +67,31 @@ public class DatabaseHandler
     conn.createStatement().execute("INSERT INTO PUBLIC.UBER_SECRET_TABLE (data1,data2) VALUES ('data2','more data2')");
   }
 
+  /**
+   * Execute a query
+   * @param queryToExecute
+   * @return
+   * @throws SQLException
+   */
   public ResultSet executeQuery(final String queryToExecute) throws SQLException {
     final ResultSet resultSet = conn.createStatement().executeQuery(queryToExecute);
     return resultSet;
+  }
+
+
+  /**
+   * Executes a prepared statement
+   * @param queryToExecute
+   * @param params
+   * @return
+   * @throws SQLException
+   */
+  public ResultSet executePreparedStmt(final String queryToExecute, final String ... params) throws SQLException {
+    final PreparedStatement preparedStatement = conn.prepareStatement(queryToExecute);
+    for (int idx=1; idx <= params.length; idx++) {
+       preparedStatement.setString(idx,params[idx-1]);
+    }
+    return preparedStatement.executeQuery();
   }
 
   /**
