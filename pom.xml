@@ -12,19 +12,36 @@
   <properties>
     <jetty.version>9.4.6.v20170531</jetty.version>
     <servlet.api.version>2.5</servlet.api.version>
+    <jsp.api.version>2.0</jsp.api.version>
+    <jstl.api.version>1.2</jstl.api.version>
     <h2.version>1.4.196</h2.version>
     <jetty.port>8080</jetty.port>
   </properties>
 
   <dependencies>
 
-    <!-- we need this for building it -->
+    <!-- we need this for coding :) -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>${servlet.api.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>${jsp.api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>jstl-api</artifactId>
+      <version>${jstl.api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+
 
     <!-- Database for testing -->
     <dependency>
