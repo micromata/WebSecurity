@@ -9,3 +9,9 @@ mvn jetty:run
 ```
 
 und dann die Url http://localhost:8080 im Browser öffnen.   
+
+
+## TODOS:
+
+*  BeefShell: https://null-byte.wonderhowto.com/how-to/exploiting-xss-with-beef-part-2-0161802/
+* ClickJacking
