@@ -83,8 +83,10 @@ Benutzer mit der id: <%=userId%>
 
 <div class="well">
     <h3>Anleitung wie man über Parameter SQL Injection vorbereiten kann:</h3>
-    <a href="https://www.w3schools.com/sql/sql_union.asp" target="_blank">https://www.w3schools.com/sql/sql_union.asp</a>
-    <a href="http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html" target="_blank">http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html</a>
+    <ul>
+        <li><a href="https://www.w3schools.com/sql/sql_union.asp" target="_blank">https://www.w3schools.com/sql/sql_union.asp</a></li>
+        <li><a href="http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html" target="_blank">http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html</a></li>
+    </ul>
 </div>
 <hr/>
 
