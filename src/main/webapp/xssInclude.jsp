@@ -36,7 +36,7 @@
         <li><a href="xss/otherSimpleXss.jsp">Weiter einfache Beispiele</a></li>
         <li><a href="xss/persistentXss.jsp?clear=true">Persistent XSS</a></li>
         <li><a href="xss/xssJqueryBypass.jsp?clear=true">Escaping mit jquery Plugin ausgehebelt</a></li>
-        <li><a href="xss/simpleXss.jsp?test=hier ist XSS mit CSS moeglich">Der Struts 2 Effekt</a></li>
+        <li>Framework Versagen: Der Struts 2 Effekt</li>
     </ul>
 
     <h5>Regeln zum Verhindern</h5>

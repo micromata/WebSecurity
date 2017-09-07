@@ -5,7 +5,7 @@
 <%@include file="../header.jsp" %>
 
 <%
-    File file = new File("user");
+    File file = new File("./target/userReq");
 
     String clear = request.getParameter("clear");
     if(clear != null && file.exists() == true) {
