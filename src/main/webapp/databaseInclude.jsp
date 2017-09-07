@@ -86,6 +86,7 @@
                 <li>JPA/Hibernate/Eclipse Link</li>
                 <li>Spring Data</li>
                 <li>Ebean</li>
+                <li>http://sqlmap.org/</li>
             </ul>
         </li>
         <li>Penetrationstests:
