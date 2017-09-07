@@ -1,6 +1,11 @@
-# WebSecurity
-WebSecurity Projekt.
+# Basic WebSecurity 
 
-This is the smaple code i use for my talk at jugh.de and wmks.
+Hier sind die Folien und das Projekt die ich für meinen Vortrag Basic Websecurity benutze.
+ 
+## Projekt starten
 
-http://www.jugh.de/termine/java-security-gitgerrit.html
+```bash
+mvn jetty:run
+```
+
+und dann die Url http://localhost:8080 im Browser öffnen.   

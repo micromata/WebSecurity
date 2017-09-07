@@ -5,7 +5,7 @@
 <%@include file="../header.jsp" %>
 
 <%
-    File file = new File("xssJquery");
+    File file = new File("./target/xssJquery");
 
     String clear = request.getParameter("clear");
     if(clear != null && file.exists() == true) {
