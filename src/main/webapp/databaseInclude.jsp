@@ -5,19 +5,6 @@
     <p>Hier werden alle SQL Injection Empfehlungen und Beispiele gezeigt</p>
 
     <h5>Beschreibung</h5>
-
-    NOTES:
-    * Protect database connections
-    * Use an existing Database Framework.
-    * When writing SQL make sure no request parameters are concateneted into the query. This implies even for HQL
-    * Handle exception: http://localhost:8080/sqlInjection/simpleSqlInjection.jsp?orderBy=id
-    * <=resultSet.getString(1) %> VS <=resultSet.getString('username') %>
-    *SELECT * FROM items
-    WHERE owner = 'wiley'
-    AND itemname = 'name' OR 'a'='a';
-    http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html
-
-
     <p>
     <blockquote>
         A SQL injection attack consists of insertion or "injection" of a SQL query via the input data from the client to the application. A successful SQL injection exploit can read sensitive data from the database, modify database data (Insert/Update/Delete), execute administration operations on the database (such as shutdown the DBMS), recover the content of a given file present on the DBMS file system and in some cases issue commands to the operating system. SQL injection attacks are a type of injection attack, in which SQL commands are injected into data-plane input in order to effect the execution of predefined SQL commands.
@@ -26,10 +13,11 @@
 
     <h5>Referenzen:</h5>
     <ul>
-        <li><a target="_blanke" href="https://www.owasp.org/index.php/SQL_Injection">https://www.owasp.org/index.php/SQL_Injection</a></li>
+        <li><a target="_blank" href="https://www.owasp.org/index.php/SQL_Injection">https://www.owasp.org/index.php/SQL_Injection</a></li>
         <li><a target="_blank" href="https://de.wikipedia.org/wiki/SQL-Injection">https://de.wikipedia.org/wiki/SQL-Injection</a></li>
         <li><a target="_blank" href="https://www.w3schools.com/sql/sql_injection.asp">https://www.w3schools.com/sql/sql_injection.asp</a></li>
         <li><a target="_blank" href="https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet">https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet</a></li>
+        <li><a target="_blank" href="http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html">http://breakthesecurity.cysecurity.org/2010/12/hacking-website-using-sql-injection-step-by-step-guide.html</a></li>
     </ul>
 
     <h5>Beispiele</h5>
@@ -86,12 +74,12 @@
                 <li>JPA/Hibernate/Eclipse Link</li>
                 <li>Spring Data</li>
                 <li>Ebean</li>
-                <li>http://sqlmap.org/</li>
             </ul>
         </li>
         <li>Penetrationstests:
             <ul>
-                <li><a href="https://www.owasp.org/index.php/Testing_for_SQL_Injection_(OTG-INPVAL-005)">https://www.owasp.org/index.php/Testing_for_SQL_Injection_(OTG-INPVAL-005)</a></li>
+                <li><a target="_blank" href="https://www.owasp.org/index.php/Testing_for_SQL_Injection_(OTG-INPVAL-005)">https://www.owasp.org/index.php/Testing_for_SQL_Injection_(OTG-INPVAL-005)</a></li>
+                <li><a target="_blank" href="http://sqlmap.org/">http://sqlmap.org/</a></li>
             </ul>
         </li>
     </ul>

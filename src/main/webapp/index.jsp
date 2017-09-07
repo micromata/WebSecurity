@@ -23,10 +23,10 @@
         <div class="tab-pane fade in active" id="overViewXss">
           <%@include file="xssInclude.jsp" %>
         </div>
-        <div class="tab-pane fade in active" id="xssWoJs">
+        <div class="tab-pane fade in" id="xssWoJs">
             <%@include file="xssWoJsInclude.jsp" %>
         </div>
-        <div class="tab-pane fade in active" id="overViewCSRF">
+        <div class="tab-pane fade in" id="overViewCSRF">
             <%@include file="csrfInclude.jsp" %>
         </div>
         <div class="tab-pane fade in" id="overViewSqlInjection">

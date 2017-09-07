@@ -41,7 +41,7 @@
 
     <h5>Regeln zum Verhindern</h5>
 
-    <ul id="myTab" class="nav nav-tabs">
+    <ul id="xssRulesMyTab" class="nav nav-tabs">
         <li class="active"><a href="#xssRule1" data-toggle="tab">Regel 1</a></li>
         <li><a href="#xssRule2" data-toggle="tab">Regel 2</a></li>
         <li><a href="#xssRule3" data-toggle="tab">Regel 3</a></li>
@@ -49,11 +49,11 @@
         <li><a href="#xssRule5" data-toggle="tab">Regel 5</a></li>
         <li><a href="#xssRule6" data-toggle="tab">Regel 6</a></li>
     </ul>
-    <div id="myTabContent" class="tab-content">
+    <div id="xssRulesMyTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="xssRule1">
             <p>
             <div class="alert alert-error">Vertraue nie Daten die Du im HTML ausgibst. <strong>EGAL</strong> woher !</div>
-                    <pre>
+            <pre>
 &lt;script&gt;<b>...NEVER PUT UNTRUSTED DATA HERE...</b>&lt;/script&gt;   directly in a script
 
 &lt;!--<b>...NEVER PUT UNTRUSTED DATA HERE...</b>--&gt;             inside an HTML comment
@@ -69,7 +69,7 @@
         <div class="tab-pane fade in" id="xssRule2">
             <div class="alert alert-error">Daten die irgendwo im HTML Body, oder in anderen Tags, ausgegben werden, sollten immer escaped werden.</div>
             <p>
-                  <pre>
+            <pre>
 &lt;body&gt;<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</b>&lt;/body&gt;
 
 &lt;div&gt;<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</b>&lt;/div&gt;
@@ -82,7 +82,7 @@ any other normal HTML elements
         <div class="tab-pane fade in" id="xssRule3">
             <div class="alert alert-error">Daten die in Attributen ausgegben werden wie z.B. id="" name="" sollten immer escaped werden.</div>
             <p>
-                  <pre>
+            <pre>
 &lt;div attr=<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</b>&gt;content&lt;/div&gt;
 inside UNquoted attribute
 
@@ -98,7 +98,7 @@ inside double quoted attribute
             <div class="alert alert-error">Daten die in JavaScript ausgegben werden sollten immer escaped werden.</div>
             <div class="alert alert-error"><strong>NIE DATEN IN EVENT HTML ATTRIBUTEN AUSGEBEN wie onmouseover etc.!</strong></div>
             <p>
-                <pre>
+            <pre>
 &lt;script&gt;alert('<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...'</b>)&lt;/script&gt;
 inside a quoted string
 
@@ -112,7 +112,7 @@ inside quoted event handler
 
             <div class="alert alert-error">Achtung es gibt Funktionen da hilft escapen nicht.</div>
             <p>
-                <pre>
+            <pre>
 &lt;script&gt;
   window.setInterval('<b>...EVEN IF YOU ESCAPE UNTRUSTED DATA YOU ARE XSSED HERE...'</b>);
 &lt;/script&gt;
@@ -123,19 +123,19 @@ inside quoted event handler
 
             <div class="alert alert-error">Achtung JSON !</div>
             <p>
-                <pre>
+            <pre>
 &lt;script&gt;
   var initData = &lt;%= data.to_json&nbsp;%&gt;; // <b>Do NOT do this.</b>
 &lt;/script&gt;
 
                 </pre>
             <div class="alert alert-success">So kann man es machen !</div>
-                <pre>
+            <pre>
 &lt;span style="display:none" id="init_data"&gt;
   &lt;%= data.to_json&nbsp;%&gt;  &lt;-- data is HTML escaped --&gt;
 &lt;/span&gt;
                 </pre>
-                <pre>
+            <pre>
 &lt;script&gt;
   var jsonText = document.getElementById('init_data').innerHTML;  // unescapes the content of the span
   var initData = JSON.parse(jsonText);
@@ -147,7 +147,7 @@ inside quoted event handler
         <div class="tab-pane fade in" id="xssRule5">
             <div class="alert alert-error">Daten die in CSS ausgegeben werden, sollten immer escaped werden.</div>
             <p>
-              <pre>
+            <pre>
 &lt;style&gt;selector { property&nbsp;: <b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</b>; } &lt;/style&gt;
 
 &lt;style&gt;selector { property&nbsp;: "<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</b>"; } &lt;/style&gt;
@@ -157,7 +157,7 @@ inside quoted event handler
             </p>
             <div class="alert alert-error">Das hilft nicht immer !</div>
             <p>
-              <pre>
+            <pre>
 { background-url&nbsp;: "javascript:alert(1)"; }  // and all other URLs
 { text-size: "expression(alert('XSS'))"; }   // only in IE
               </pre>
@@ -166,7 +166,7 @@ inside quoted event handler
         <div class="tab-pane fade in" id="xssRule6">
             <div class="alert alert-error">Parameter in URLs immer escapen.</div>
             <p>
-             <pre>&lt;a href="http://www.somesite.com?test=<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE..."</b>&gt;link&lt;/a &gt;</pre>
+            <pre>&lt;a href="http://www.somesite.com?test=<b>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE..."</b>&gt;link&lt;/a &gt;</pre>
             </p>
         </div>
     </div>
@@ -175,15 +175,15 @@ inside quoted event handler
     <ul>
         <li>Bibliotheken:
             <ul>
-                <li><strong>JSTL: </strong> JSTL &lt;c:out value="" /&gt; </li>
+                <li><strong>JSTL: </strong> JSTL &lt;c:out value="" /&gt;</li>
                 <li><strong>JAVA: </strong> ESAPI <a href="http://code.google.com/p/owasp-esapi-java/source/browse/trunk/src/main/java/org/owasp/esapi/codecs/HTMLEntityCodec.java">http://code.google.com/p/owasp-esapi-java/source/browse/trunk/src/main/java/org/owasp/esapi/codecs/HTMLEntityCodec.java</a> Kann CSS HTML und JS encoden.</li>
             </ul>
         </li>
         <li>Penetrationstests:
-          <ul>
-              <li><a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project">OWASP ZAP kostenlos</a></li>
-              <li><a href="http://www.portswigger.net/burp/">Burp</a></li>
-          </ul>
+            <ul>
+                <li><a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project">OWASP ZAP kostenlos</a></li>
+                <li><a href="http://www.portswigger.net/burp/">Burp</a></li>
+            </ul>
         </li>
     </ul>
 
