@@ -9,6 +9,7 @@ mvn jetty:run
 ```
 
 und dann die Url http://localhost:8080 im Browser öffnen.   
+Am besten den Firefox benutzen da gehen die meisten XSS Attacken.
 
 
 ## TODOS:

@@ -11,6 +11,10 @@
 
 <div class="row-fluid marketing">
 
+    <div class="well">
+        <a href="./slides/">Slides</a>
+    </div>
+
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#overViewXss" data-toggle="tab">XSS</a></li>
         <li><a href="#xssWoJs" data-toggle="tab">XSS Scriptless</a></li>
@@ -21,7 +25,7 @@
 
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="overViewXss">
-          <%@include file="xssInclude.jsp" %>
+            <%@include file="xssInclude.jsp" %>
         </div>
         <div class="tab-pane fade in" id="xssWoJs">
             <%@include file="xssWoJsInclude.jsp" %>
